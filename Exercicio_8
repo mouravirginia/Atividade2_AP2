@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TAMANHO_DA_PILHA 10
+
+struct pilha{
+    int topo_da_pilha;
+    int itens[TAMANHO_DA_PILHA];
+};
+
+int pilha_vazia (struct pilha *pq){
+    if(pq->topo_da_pilha ==-1){
+        return -1;
+    }
+    return 0;
+}
+
+void pop(struct pilha *pq){
+    if(pilha_vazia(pq)){
+        printf("\n A pilha se encontra vazia");
+       
+    }
+    pq->itens[pq->topo_da_pilha--];
+    return;
+}
+
+void push(struct pilha *pq, int valor){
+    if(pq->topo_da_pilha == (TAMANHO_DA_PILHA-1)){
+        printf("\n A pilha encontra-se cheia no momento!");
+    }
+   
+    pq-> itens[++(pq->topo_da_pilha)] = valor;
+   
+    return;
+}
+
+int tamanho_Pilha(struct pilha *pq){
+    return pq->topo_da_pilha+1;
+}
+
+int elemento_do_Topo(struct pilha *pq){
+    return pq->itens[pq->topo_da_pilha];
+}
+
+void imprimir_elemento(struct pilha *pq){
+    for(int i=9; i>=0; i--){
+       
+        printf("\n Item da pilha %d", pq->itens[i]);        
+       
+    }
+
+}
+
+void operacao_da_pilha(struct pilha *pq, int valor){
+   
+        if(valor%2 == 0){
+            push(pq,valor);
+        }else{
+                pq->itens[pq->topo_da_pilha--];
+        }    
+   
+}
+
+int main() {
+    struct pilha pl;
+    pl.topo_da_pilha = -1;
+    int escolher;
+
+    printf("\n Informe os 10 números inteiros que deseja inserir na pilha\n");
+   
+    for(int i=0; i<10;i++){
+   
+        scanf("\n %d", &escolher);
+        operacao_da_pilha(&pl,escolher);
+    }
+   
+   
+    imprimir_elemento(&pl);
+   
+    return 0;
+}
