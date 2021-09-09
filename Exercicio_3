@@ -1,0 +1,48 @@
+ #include <stdio.h>
+#include <stdlib.h>
+
+#define Tamanho_Fila 100
+
+//Estrutura para representar a nossa fila
+struct fila {
+    int itens [Tamanho_Fila];
+    int frente;
+    int atras;
+};
+
+//Inserção de itens na fila
+void Inserir_Item (struct fila *pq, int x) {
+    if(pq->atras+1 >= Tamanho_Fila) {
+    } else
+        pq->itens[pq->atras++] = x;
+}
+
+int main() {
+    // Criação de uma fila vazia
+    struct fila nossaFila;
+    nossaFila.frente = 0; // Controlar o início da fila
+    nossaFila.atras = 0; // Controlar o fim da fila
+
+    //Testando a função Inserir_Item
+    Inserir_Item(&nossaFila,1);
+    Inserir_Item(&nossaFila,2);
+    Inserir_Item(&nossaFila,3);
+    Inserir_Item(&nossaFila,4);
+    Inserir_Item(&nossaFila,5);
+    Inserir_Item(&nossaFila,6);
+    Inserir_Item(&nossaFila,7);
+    Inserir_Item(&nossaFila,8);
+    Inserir_Item(&nossaFila,9);
+
+    printf("\n Item 1 da fila: %d", nossaFila.itens[0]);
+    printf("\n Item 2 da fila: %d", nossaFila.itens[1]);
+    printf("\n Item 3 da fila: %d", nossaFila.itens[2]);
+    printf("\n Item 4 da fila: %d", nossaFila.itens[3]);
+    printf("\n Item 5 da fila: %d", nossaFila.itens[4]);
+    printf("\n Item 6 da fila: %d", nossaFila.itens[5]);
+    printf("\n Item 7 da fila: %d", nossaFila.itens[6]);
+    printf("\n Item 8 da fila: %d", nossaFila.itens[7]);
+    printf("\n Item 9 da fila: %d", nossaFila.itens[8]);
+    
+    return 0;
+}
