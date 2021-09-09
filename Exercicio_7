@@ -1,0 +1,92 @@
+#include <stdio.h>
+void push(int valor); // Serve para inserirmos elementos no topo da nossa pilha
+int pop(void); //Serve para removermos elementos no topo da nossa pilha
+int tamanhoPilha(void); //Retorna a quantidade de elementos da nossa pilha
+int elementoNoTopo(void); //Retorna o elemento que está no topo da nossa pilha
+void vazia(void); //Informa se a pilha está vazia
+int pilha[10]; //Criando a nossa pilha estática
+int pos = 0; //Criando a variável que vai controlar o topo da nossa pilha
+//Implementando a operação de inserção de elementos na pilha
+void push(int valor) {
+    if(pos>=10) { //Verificamos se a pilha está cheia antes de armazenarmos
+        printf("\n A pilha está cheia!");
+    } else {
+        pilha[pos] = valor;
+        pos++;
+    }
+    return;   
+}
+//Implementando a operação de remoção de elementos da pilha
+int pop(void) {
+    int rem = --pos; //Pega a posição do elemento que está no topo
+    int pegaValorTopo = pilha[rem];
+    pilha[rem] = 0;
+    //return (pilha[--pos]); //Auto-decremento
+    return (pegaValorTopo);
+}
+//Implementação da operação de apresentação do tamanho da pilha
+int tamanhoPilha(void) {
+    return pos;
+}
+//Implementação da operação que retorna o elemento que está no topo da nossa 
+//pilha sem removê-lo
+int elementoNoTopo(void) {
+    int aux = pos;
+    aux = aux - 1;
+    //return pilha[pos];
+    return pilha[aux];
+}
+//Implementação da operação vazia
+void vazia(void) {
+    if(pos==0) {
+        printf("\n A pilha está vazia!");
+    } else {
+        printf("\n A pilha não está vazia!");
+    }
+}
+int main()
+{
+    printf("\n Inserção de elementos na pilha:");
+    push(14);
+    push(20);
+    push(-1);
+    push(7);
+    printf("\n Apresentação dos elementos armazenados na pilha");
+    int i;
+    for(i=9; i>=0; i--) {
+        printf("\n %d",pilha[i]);
+}
+    printf("\n %d", pilha[i]);
+    printf("\n Remoçao de elementos da pilha:");
+    printf("\n Elemento removido: %d", pop());
+    printf("\n Apresentaçao dos elementos armazenados na pilha:");
+    for (i = 9; i >= 0; i--) {
+        printf("\n %d", pilha[i]);
+    }
+    printf("\n Elemento removido: %d", pop());
+    printf("\n Apresentaçao dos elementos armazenados na pilha:");
+    for (i = 9; i >= 0; i--) {
+        printf("\n %d", pilha[i]);
+    }
+    printf("\n Elemento removido: %d", pop());
+    printf("\n Apresentaçao dos elementos armazenados na pilha:");
+    for (i = 9; i >= 0; i--) {
+        printf("\n %d", pilha[i]);
+    }
+    printf("\n Elemento removido: %d", pop());
+    printf("\n Apresentaçao dos elementos armazenados na pilha:");
+    for (i = 9; i >= 0; i--) {
+        printf("\n %d", pilha[i]);
+    }
+    vazia();
+    push(8);
+    push(5);
+    push(-10);
+    printf("\n Apresentaçao dos elementos armazenados na pilha");
+    for(i=9; i>=0; i--) {
+        printf("\n %d",pilha[i]);
+}
+    printf("\n O elemento do topo e: %d", elementoNoTopo());
+    printf("\n O tamanho da pilha e: %d", tamanhoPilha());
+    return 0;   
+}
