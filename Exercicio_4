@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TAMANHO_DA_FILA 100
+
+struct fila{
+  int itens[TAMANHO_DA_FILA];
+  int frente;
+  int atras;
+};
+
+int verificar_elemento(struct fila *pq){
+    if(pq->frente != pq->atras){
+        return 0;
+    }else
+        return 1;
+}
+
+void inserir_elemento (struct fila *pq, int x){
+    int valor;
+    int valor_Variavel=1 ;
+    int valor_final;
+   
+    if(pq->atras >= TAMANHO_DA_FILA){
+        printf("\n A fila neste momento se encontra cheia. Por favor, antes de enserir algum valor, exclua algum elemento da fila");
+        exit(1);
+    }else{
+        for(int i=1; i<=x; i++){
+           
+           
+            valor = i*valor_Variavel;
+            valor_Variavel = valor;
+            valor_final = valor;
+           
+        }    
+    pq->itens[pq->atras++] = valor_final;
+    }
+}
+
+int tamanho (struct fila *pq){
+    return pq->atras;
+}
+
+void imprimir_elemento (struct fila *pq){
+    for(int i=0; i<tamanho(pq); i++){
+   
+        printf("\n O valor fatorado e a sua posição na fila é: %d", pq->itens[i]);        
+    }
+
+}
+
+int main(){
+
+    struct fila nossaFila;
+    nossaFila.frente = 0;
+    nossaFila.atras = 0;
+    int valor;
+    for(int f=0; f<TAMANHO_DA_FILA; f++){
+        printf("\n Digite o valor que você deseja fatorar \n");
+        scanf(" %d", &valor);
+        inserir_elemento(&nossaFila, valor);
+        imprimir_elemento(&nossaFila);
+}    
+    return 0;
+}
