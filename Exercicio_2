@@ -1,0 +1,107 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define TAMANHO_DA_FILA 100
+
+//Estrutura para representar a nossa fila
+struct fila {
+    int itens [TAMANHO_DA_FILA];
+    int frente;
+    int atras;
+};
+
+// Verificar se a fila está vazia
+int verificaFilaVazia (struct fila *pq) {
+    if( pq->frente != pq->atras ) { 
+        return 0;
+    } else
+        return 1;
+}
+
+//Inserção de itens na fila
+void inserirItem (struct fila *pq, int x) {
+    if(pq->atras+1 >= TAMANHO_DA_FILA) {
+        printf("\n A fila está cheia! Aconteceu um estouro de fila!");
+        exit(1);
+    } else
+        pq->itens[pq->atras++] = x;
+}
+
+//Retorna o tamanho da fila
+int tamanho (struct fila *pq){
+    return pq->atras;
+}
+
+//Consulta o próximo item a ser acessado na fila
+int frente (struct fila *pq){
+    return pq->itens[0];
+}
+
+//Remoção de elementos da fila
+int remover (struct fila *pq){
+    int x, i;
+    if (verificaFilaVazia(pq)){
+        printf("\n A fila está vazia. Não é possível remover itens!");
+        exit(1);
+    }
+    x = frente(pq);
+    for(i = 0; i < tamanho (pq); i++){
+        pq->itens[i] = pq->itens[i+1];
+        //pq->itens[0] = pq->itens[1]
+        //pq->itens[1] = pq->itens[2]
+        //pq->itens[2] = pq->itens[3]
+    }
+    pq->atras--;
+    return x;
+}
+
+// Esvaziamento da fila
+void esvaziarFila(struct fila *pq){
+    int tam = tamanho(pq);
+    int i;   
+    printf("\n Processo de esvaziamento da fila");
+    for(i = 0; i < tam; i++){
+        printf("\n Item %d retirado da fila.", remover(pq));
+    }
+}
+int main()
+{
+    // Criação de uma fila vazia
+    struct fila nossaFila;
+    nossaFila.frente = 0; // Controlar o início da fila
+    nossaFila.atras = 0; // Controlar o fim da fila   
+    
+    //Testando a função verificaFilaVazia
+    //printf("\n Valor resultante: %d ", verificaFilaVazia(&nossaFila));
+    
+    //Testando a função inserirItem
+    inserirItem(&nossaFila,30);
+    inserirItem(&nossaFila,-12);
+    inserirItem(&nossaFila,2);
+    inserirItem(&nossaFila,10);
+    
+    printf("\n Item 0 da fila: %d", nossaFila.itens[0]);
+    printf("\n Item 1 da fila: %d", nossaFila.itens[1]);
+    printf("\n Item 2 da fila: %d", nossaFila.itens[2]);
+    printf("\n Item 3 da fila: %d", nossaFila.itens[3]);
+    
+    //Testando a função verificaFilaVazia
+    printf("\n Valor resultante: %d ", verificaFilaVazia(&nossaFila));
+    
+    //Testando a função que retorna o tamanho da fila
+    printf("\n Tamanho da fila: %d ", tamanho(&nossaFila));
+    printf("\n O próximo elemento a ser atendito é: %d ", frente(&nossaFila));
+    printf("\n O elemento que foi removido foi: %d", remover(&nossaFila));
+    printf("\n Item 0 da fila: %d", nossaFila.itens[0]);
+    printf("\n Item 1 da fila: %d", nossaFila.itens[1]);
+    printf("\n Item 2 da fila: %d", nossaFila.itens[2]);
+    
+    //Testando a função que retorna o tamanho da fila
+    printf("\n Tamanho da fila: %d ", tamanho(&nossaFila));
+    printf("\n O próximo elemento a ser atendito é: %d ", frente(&nossaFila));
+    esvaziarFila(&nossaFila);
+    
+    //Testando a função verificaFilaVazia
+    printf("\n Valor resultante: %d ", verificaFilaVazia(&nossaFila));
+    return 0;
+}
