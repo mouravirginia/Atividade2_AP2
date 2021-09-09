@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define TAMANHO_DA_FILA 100
+struct fila{
+  int itens[TAMANHO_DA_FILA];
+  int frente;
+  int atras;
+};
+int verificar(struct fila *pq){
+    if(pq->frente != pq->atras){
+        return 0;
+    }else
+        return 1;
+}
+int frente (struct fila *pq){
+    return pq->itens[0];
+}
+void inserir_elemento (struct fila *pq, int x){
+    if(pq->atras >= TAMANHO_DA_FILA){
+        printf("\n A fila está cheia! Para inserir um elemento, primeiro retire algum.");
+        exit(1);
+    }else
+    pq->itens[pq->atras++] = x;  
+}
+int tamanho (struct fila *pq){
+    return pq->atras;
+}
+void imprimir_elemento (struct fila *pq){
+    for(int i=0; i<tamanho(pq); i++){
+        printf("\n O tempo de excecução do processo é: %d  ", pq->itens[i]);        
+    }
+}
+int remover_elemento(struct fila *pq){
+    if(verificar(pq)){
+        printf("\n Não existem processos para serem retirados!");  
+    }
+    int x = frente(pq);
+    for(int i = 0; i<tamanho(pq); i++){
+        pq->itens[i] = pq->itens[i+1];  
+    }
+    pq->atras--;
+    return x;  
+}
+int main(){
+    struct fila nossaFila;
+    nossaFila.frente = 0;
+    nossaFila.atras = 0;
+    int valor;
+    int escolher;
+    for(int f=0; f<TAMANHO_DA_FILA; f++){
+    printf("\n Escolha a opção desejada:");
+    printf("\n 1: Para inserir processos;");
+    printf("\n 2: Para mostrar processos;");
+    printf("\n 3: Para excluir processos;");
+    printf("\n 4: Para encerrar os processos. \n");
+    scanf("\n %d", &escolher);
+    switch(escolher){
+        case 1:
+            printf("\n Qual o tempo de execução desse processo? \n");
+            scanf(" %d", &valor);
+            inserir_elemento(&nossaFila, valor);
+            break;
+        case 2:
+            imprimir_elemento(&nossaFila);
+            break;
+        case 3:
+            remover_elemento(&nossaFila);
+            break;
+        case 4:
+            printf("\n Fila encerrada!");
+            f=TAMANHO_DA_FILA;            
+            break;
+    }
+}    
+    return 0;
+} 
